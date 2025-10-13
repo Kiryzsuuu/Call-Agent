@@ -19,8 +19,9 @@ from livekit.agents import AgentSession, Agent
 from livekit.plugins import openai
 
 from dotenv import load_dotenv
+import os
 
-load_dotenv(".env.local")
+load_dotenv(dotenv_path="../.env.local")
 
 logger = logging.getLogger("my-worker")
 logger.setLevel(logging.INFO)
@@ -39,7 +40,7 @@ class SessionConfig:
 
 def parse_session_config(data: Dict[str, Any]) -> SessionConfig:
     return SessionConfig(
-        openai_api_key=data.get("openai_api_key", ""),
+        openai_api_key=os.getenv("LIVEKIT_API_KEY"),
         instructions=data.get("instructions", "Anda adalah Interactive Call Agent AI."),
         voice=data.get("voice", "alloy"),
         temperature=float(data.get("temperature", 0.8)),
@@ -56,6 +57,7 @@ async def entrypoint(ctx: JobContext):
     config = parse_session_config(metadata)
 
     if not config.openai_api_key:
+        print(config.openai_api_key)
         raise Exception("OpenAI API Key is required")
 
     # Get PDF text from port 8002

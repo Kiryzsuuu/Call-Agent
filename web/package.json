@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"pnpm run next\" \"pnpm run agents\"",
+    "next" : "next dev",
+    "agents": "cd ../agent && python main.py & python pdf_api.py & python whatsapp_bot.py",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
