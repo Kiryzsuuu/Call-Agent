@@ -1,0 +1,17 @@
+{
+  "session_id": "583949e0-a505-44fb-b5ee-9ab8bef4ad37",
+  "start_time": "2025-09-28T23:21:26.076626",
+  "messages": [
+    {
+      "type": "system",
+      "message": "Session started",
+      "timestamp": "2025-09-28T23:21:26.076626"
+    },
+    {
+      "type": "agent",
+      "message": "Halo! Saya adalah Interactive Call Agent AI. Bagaimana saya bisa membantu Anda hari ini?",
+      "timestamp": "2025-09-28T23:21:30.916789"
+    }
+  ],
+  "status": "active"
+}

@@ -1,0 +1,18 @@
+{
+  "session_id": "4419a3c2-e6dd-4533-8cdd-dba3d27bbe51",
+  "start_time": "2025-10-05T07:51:10.339859",
+  "messages": [
+    {
+      "type": "system",
+      "message": "Session started",
+      "timestamp": "2025-10-05T07:51:10.339859"
+    }
+  ],
+  "order_status": "none",
+  "session_stats": {
+    "total_messages": 1,
+    "response_delays": [],
+    "keywords_detected": []
+  },
+  "status": "active"
+}
