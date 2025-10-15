@@ -1,0 +1,13 @@
+{
+  "name": "call-agent",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cd web && npm run dev",
+    "build": "cd web && npm run build", 
+    "start": "cd web && npm start",
+    "install": "cd web && npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
