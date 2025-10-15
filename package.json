@@ -5,7 +5,7 @@
     "dev": "cd web && npm run dev",
     "build": "cd web && npm run build", 
     "start": "cd web && npm start",
-    "install": "cd web && npm install"
+    "install": "cd web && npm install --legacy-peer-deps"
   },
   "engines": {
     "node": ">=18.0.0"
