@@ -1,14 +1,13 @@
 [phases.setup]
-nixPkgs = ['nodejs', 'python3', 'python3Packages.pip']
+nixPkgs = ['nodejs']
 
 [phases.install]
 cmds = [
-    'cd web && npm install',
-    'cd agent && pip install -r requirements.txt'
+    'cd web && npm install -g pnpm && pnpm install'
 ]
 
 [phases.build]
-cmds = ['cd web && npm run build']
+cmds = ['cd web && pnpm build']
 
 [start]
-cmd = 'cd web && npm start & cd agent && python pdf_api.py & python main.py dev'
+cmd = 'cd web && pnpm start'
