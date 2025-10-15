@@ -21,7 +21,7 @@ from livekit.plugins import openai
 from dotenv import load_dotenv
 import os
 
-load_dotenv(dotenv_path="../.env.local")
+load_dotenv(dotenv_path=".env.local")
 
 logger = logging.getLogger("my-worker")
 logger.setLevel(logging.INFO)
@@ -172,4 +172,10 @@ async def entrypoint(ctx: JobContext):
     logger.info(f"Agent started for session {session_id}")
 
 if __name__ == "__main__":
-    cli.run_app(WorkerOptions(entrypoint_fnc=entrypoint, worker_type=WorkerType.ROOM))
+    cli.run_app(WorkerOptions(
+        entrypoint_fnc=entrypoint, 
+        worker_type=WorkerType.ROOM,
+        ws_url=os.getenv("LIVEKIT_URL"),
+        api_key=os.getenv("LIVEKIT_API_KEY"),
+        api_secret=os.getenv("LIVEKIT_API_SECRET")
+    ))

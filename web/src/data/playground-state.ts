@@ -34,9 +34,9 @@ export const defaultSessionConfig: SessionConfig = {
   voice: VoiceId.alloy,
   temperature: 0.8,
   maxOutputTokens: null,
-  vadThreshold: 0.5,
-  vadSilenceDurationMs: 200,
-  vadPrefixPaddingMs: 300,
+  vadThreshold: 0.3,
+  vadSilenceDurationMs: 1000,
+  vadPrefixPaddingMs: 500,
 };
 
 // Define the initial state

@@ -2,11 +2,14 @@ import { AccessToken } from "livekit-server-sdk";
 import { PlaygroundState } from "@/data/playground-state";
 
 export async function POST(request: Request) {
+  console.log('Token endpoint called');
   let playgroundState: PlaygroundState;
 
   try {
     playgroundState = await request.json();
+    console.log('Playground state received:', JSON.stringify(playgroundState, null, 2));
   } catch (error) {
+    console.error('JSON parse error:', error);
     return Response.json(
       { error: "Invalid JSON in request body" },
       { status: 400 },
@@ -15,7 +18,6 @@ export async function POST(request: Request) {
 
   const {
     instructions,
-    openaiAPIKey,
     sessionConfig: {
       turnDetection,
       modalities,
@@ -28,10 +30,12 @@ export async function POST(request: Request) {
     },
   } = playgroundState;
 
+  const openaiAPIKey = process.env.OPENAI_API_KEY;
+  console.log('Using server OpenAI API key:', !!openaiAPIKey);
   if (!openaiAPIKey) {
     return Response.json(
-      { error: "OpenAI API key is required" },
-      { status: 400 },
+      { error: "OpenAI API key not configured on server" },
+      { status: 500 },
     );
   }
 

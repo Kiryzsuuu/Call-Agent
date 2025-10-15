@@ -71,69 +71,9 @@ export function ConfigurationForm({ userRole }: { userRole?: string }) {
   const { agent } = useVoiceAssistant();
 
   const updateConfig = useCallback(async () => {
-    const values = pgState.sessionConfig;
-    const attributes: { [key: string]: string } = {
-      instructions: pgState.instructions,
-      voice: values.voice,
-      turn_detection: JSON.stringify({
-        type: values.turnDetection,
-        threshold: values.vadThreshold,
-        silence_duration_ms: values.vadSilenceDurationMs,
-        prefix_padding_ms: values.vadPrefixPaddingMs,
-      }),
-      modalities: values.modalities,
-      temperature: values.temperature.toString(),
-      max_output_tokens: values.maxOutputTokens
-        ? values.maxOutputTokens.toString()
-        : "",
-    };
-
-    const hadExistingAttributes =
-      Object.keys(localParticipant.attributes).length > 0;
-
-    const onlyVoiceChanged = Object.keys(attributes).every(
-      (key) =>
-        key === "voice" ||
-        attributes[key] === (localParticipant.attributes[key] as string),
-    );
-
-    if (onlyVoiceChanged) {
-      return;
-    }
-
-    if (!agent?.identity) {
-      return;
-    }
-
-    try {
-      let response = await localParticipant.performRpc({
-        destinationIdentity: agent.identity,
-        method: "pg.updateConfig",
-        payload: JSON.stringify(attributes),
-      });
-      let responseObj = JSON.parse(response);
-      if (responseObj.changed) {
-        toast({
-          title: "Configuration Updated",
-          description: "Your changes have been applied successfully.",
-          variant: "success",
-        });
-      }
-    } catch (e) {
-      toast({
-        title: "Error Updating Configuration",
-        description:
-          "There was an error updating your configuration. Please try again.",
-        variant: "destructive",
-      });
-    }
-  }, [
-    pgState.sessionConfig,
-    pgState.instructions,
-    localParticipant,
-    toast,
-    agent,
-  ]);
+    // Configuration updates disabled - agent handles config via metadata
+    return;
+  }, []);
 
   const handleDebouncedUpdate = useCallback(() => {
     if (debounceTimeoutRef.current) {
