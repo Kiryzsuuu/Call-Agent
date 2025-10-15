@@ -173,10 +173,20 @@ export const PlaygroundStateProvider = ({
   const [showAuthDialog, setShowAuthDialog] = useState(false);
 
   useEffect(() => {
+    // Check for environment variable first
+    const envKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
     const storedKey = localStorage.getItem(LS_OPENAI_API_KEY_NAME);
-    if (storedKey && storedKey.length >= 1) {
+    
+    if (envKey && envKey.length >= 1) {
+      // Use environment variable if available
+      dispatch({ type: "SET_API_KEY", payload: envKey });
+      setShowAuthDialog(false);
+    } else if (storedKey && storedKey.length >= 1) {
+      // Fall back to stored key
       dispatch({ type: "SET_API_KEY", payload: storedKey });
+      setShowAuthDialog(false);
     } else {
+      // No key available, show auth dialog
       dispatch({ type: "SET_API_KEY", payload: null });
       setShowAuthDialog(true);
     }

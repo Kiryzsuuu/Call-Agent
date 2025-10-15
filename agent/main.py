@@ -40,7 +40,7 @@ class SessionConfig:
 
 def parse_session_config(data: Dict[str, Any]) -> SessionConfig:
     return SessionConfig(
-        openai_api_key=os.getenv("LIVEKIT_API_KEY"),
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
         instructions=data.get("instructions", "Anda adalah Interactive Call Agent AI."),
         voice=data.get("voice", "alloy"),
         temperature=float(data.get("temperature", 0.8)),
