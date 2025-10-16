@@ -155,7 +155,7 @@ export function Transcript({
                 id: segment.id,
                 text: segment.text.trim(),
                 isAgent: participant?.isAgent,
-                timestamp: segment.start,
+                timestamp: segment.startTime || 0,
                 isChat: false
               })),
               ...chatMessages
