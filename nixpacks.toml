@@ -11,4 +11,4 @@ cmds = [
 cmds = ['cd web && npm run build']
 
 [start]
-cmd = 'cd web && npm start & cd agent && uvicorn pdf_api:app --host 0.0.0.0 --port 8002'
+cmd = 'cd agent && uvicorn pdf_api:app --host 0.0.0.0 --port $PORT'
