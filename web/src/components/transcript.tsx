@@ -19,7 +19,8 @@ export function Transcript({
   
   const handleEditTranscript = async (itemId: string, newText: string) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8002/edit-transcript`, {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8002';
+      const response = await fetch(`${backendUrl}/edit-transcript`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +71,8 @@ export function Transcript({
 
     const pollChatMessages = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8002/call-logs/${sessionId}`);
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8002';
+        const response = await fetch(`${backendUrl}/call-logs/${sessionId}`);
         if (response.ok) {
           const data = await response.json();
           const messages = data.messages

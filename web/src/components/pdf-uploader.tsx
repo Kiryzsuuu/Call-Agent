@@ -31,7 +31,8 @@ export function PdfUploader({ onPdfSelected }: { onPdfSelected?: () => void } = 
 
   const fetchPdfs = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8002/list-pdfs");
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8002';
+      const response = await fetch(`${backendUrl}/list-pdfs`);
       const data = await response.json();
       setPdfs(data.pdfs || []);
     } catch (error) {
@@ -42,7 +43,8 @@ export function PdfUploader({ onPdfSelected }: { onPdfSelected?: () => void } = 
   const selectPdf = async (pdfId: string) => {
     setIsSelectLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8002/select-pdf", {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8002';
+      const response = await fetch(`${backendUrl}/select-pdf`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +68,8 @@ export function PdfUploader({ onPdfSelected }: { onPdfSelected?: () => void } = 
       const formData = new FormData();
       formData.append("file", selectedFile);
       try {
-        const res = await fetch("http://127.0.0.1:8002/upload-pdf-ocr", {
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8002';
+        const res = await fetch(`${backendUrl}/upload-pdf-ocr`, {
           method: "POST",
           body: formData,
         });
