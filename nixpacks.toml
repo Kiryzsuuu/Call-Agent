@@ -1,14 +1,12 @@
 [phases.setup]
-nixPkgs = ['nodejs', 'python3', 'python3Packages.pip']
+nixPkgs = ['python3', 'python3Packages.pip', 'python3Packages.virtualenv']
 
 [phases.install]
 cmds = [
-    'cd web && npm install',
-    'cd agent && pip install -r requirements.txt'
+    'cd agent && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt'
 ]
 
-[phases.build]
-cmds = ['cd web && npm run build']
+
 
 [start]
-cmd = 'cd agent && uvicorn pdf_api:app --host 0.0.0.0 --port $PORT'
+cmd = 'cd agent && source venv/bin/activate && uvicorn pdf_api:app --host 0.0.0.0 --port $PORT'
