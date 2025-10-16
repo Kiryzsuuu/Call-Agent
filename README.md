@@ -81,7 +81,7 @@ uvicorn main:app --reload --port 8001  # Backend config (khusus endpoint /config
 
 ```bash
 cd ../web
-pnpm install
+npm install
 ```
 
 Buat file `.env.local` di folder `web/`:
@@ -124,7 +124,7 @@ python main.py dev
 ### 4. Jalankan Frontend (Port 3000)
 ```bash
 cd web
-pnpm dev
+npm run dev
 ```
 
 ---
