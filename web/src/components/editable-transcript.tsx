@@ -13,6 +13,7 @@ interface EditableTranscriptItemProps {
     sender?: string;
     isChat?: boolean;
     timestamp: string;
+    edited?: boolean;
   };
   onEdit: (id: string, newText: string) => void;
 }
