@@ -100,9 +100,7 @@ export function EditableTranscriptItem({ item, onEdit }: EditableTranscriptItemP
             <span>{isAgentMessage ? "Agent" : "User"}</span>
             <span>•</span>
             <span>{new Date(item.timestamp).toLocaleTimeString()}</span>
-            {item.edited && (
-              <span className="text-orange-500 text-xs">(edited)</span>
-            )}
+
           </div>
         </>
       )}
