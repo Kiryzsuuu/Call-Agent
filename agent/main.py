@@ -60,10 +60,11 @@ async def entrypoint(ctx: JobContext):
         print(config.openai_api_key)
         raise Exception("OpenAI API Key is required")
 
-    # Get PDF text from port 8002
+    # Get PDF text from backend API
     pdf_text = ""
+    api_base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8002")
     try:
-        response = requests.get("http://127.0.0.1:8002/pdf-text")
+        response = requests.get(f"{api_base_url}/pdf-text")
         if response.status_code == 200:
             pdf_data = response.json()
             pdf_text = pdf_data.get("text", "")
@@ -87,7 +88,8 @@ async def entrypoint(ctx: JobContext):
     def log_message(participant_type: str, message: str, status: str = "active"):
         try:
             from datetime import datetime
-            requests.post("http://127.0.0.1:8002/log-conversation", json={
+            api_base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8002")
+            requests.post(f"{api_base_url}/log-conversation", json={
                 "session_id": session_id,
                 "participant_type": participant_type,
                 "message": message,
@@ -129,7 +131,8 @@ async def entrypoint(ctx: JobContext):
                         "notes": notes
                     }
                     
-                    response = requests.post("http://127.0.0.1:8002/confirm-order", json=order_data)
+                    api_base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8002")
+                    response = requests.post(f"{api_base_url}/confirm-order", json=order_data)
                     if response.status_code == 200:
                         result = response.json()
                         logger.info(f"Order confirmed and notifications sent: {result}")
